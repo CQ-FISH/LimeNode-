@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} - LimeNode 清柠云</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  {{> header}}
+
+  <div class="limenode-body">
+    {{> sidebar}}
+
+    <main class="limenode-main">
+      <div class="page-header fade-in">
+        <h1 class="page-title">
+          <i class="fas fa-user-cog me-2 text-pink"></i>个人中心
+        </h1>
+        <p class="page-subtitle">管理您的账户信息和设置</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8">
+          <!-- 基本信息 -->
+          <div class="card mb-4 fade-in">
+            <div class="card-header">
+              <i class="fas fa-user me-2 text-pink"></i>基本信息
+            </div>
+            <div class="card-body">
+              <form class="form-ajax" action="/user/profile/update" method="POST">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label class="form-label">用户名</label>
+                    <input type="text" class="form-control" value="{{user.username}}" disabled>
+                    <small class="text-muted">用户名不可修改</small>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">用户等级</label>
+                    <input type="text" class="form-control" value="{{user.level}}" disabled>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">邮箱</label>
+                  <input type="email" class="form-control" name="email" value="{{user.email}}" required>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">手机号</label>
+                  <input type="tel" class="form-control" name="phone" value="{{user.phone}}" placeholder="请输入手机号">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">真实姓名</label>
+                  <input type="text" class="form-control" name="realname" value="{{user.realname}}" placeholder="请输入真实姓名">
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save me-2"></i>保存修改
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- 实名认证 -->
+          <div class="card mb-4 fade-in" style="animation-delay: 0.1s;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span>
+                <i class="fas fa-id-card me-2 text-pink"></i>实名认证
+              </span>
+              {{#if user.verified}}
+                <span class="badge bg-success">
+                  <i class="fas fa-check-circle me-1"></i>已认证
+                </span>
+              {{else}}
+                <span class="badge bg-warning">未认证</span>
+              {{/if}}
+            </div>
+            <div class="card-body">
+              {{#if user.verified}}
+                <div class="alert alert-success mb-0">
+                  <i class="fas fa-check-circle me-2"></i>
+                  实名认证已完成，认证时间: {{user.verifiedAt}}
+                </div>
+              {{else}}
+                <p class="text-muted mb-3">完成实名认证后可享受更多服务和功能</p>
+                <form class="form-ajax" action="/user/profile/realname" method="POST">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label">真实姓名</label>
+                        <input type="text" class="form-control" name="realname" required placeholder="请输入真实姓名">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label">身份证号</label>
+                        <input type="text" class="form-control" name="idCard" required placeholder="请输入18位身份证号" maxlength="18">
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-check me-2"></i>提交认证
+                  </button>
+                </form>
+              {{/if}}
+            </div>
+          </div>
+
+          <!-- 修改密码 -->
+          <div class="card fade-in" style="animation-delay: 0.2s;">
+            <div class="card-header">
+              <i class="fas fa-lock me-2 text-pink"></i>修改密码
+            </div>
+            <div class="card-body">
+              <form class="form-ajax" action="/user/profile/password" method="POST">
+                <div class="mb-3">
+                  <label class="form-label">原密码</label>
+                  <input type="password" class="form-control" name="oldPassword" required placeholder="请输入原密码">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">新密码</label>
+                  <input type="password" class="form-control" name="newPassword" required placeholder="请输入新密码（至少6位）" minlength="6">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">确认新密码</label>
+                  <input type="password" class="form-control" name="confirmPassword" required placeholder="请再次输入新密码">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-key me-2"></i>修改密码
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <!-- 账户概览 -->
+          <div class="card mb-4 fade-in sticky-top" style="top: 80px;">
+            <div class="card-header">
+              <i class="fas fa-wallet me-2 text-pink"></i>账户概览
+            </div>
+            <div class="card-body text-center">
+              <div class="stat-icon pink mx-auto">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="fs-2 fw-bold text-pink my-3">¥{{user.balance}}</div>
+              <div class="text-muted mb-3">账户余额</div>
+              <a href="/user/recharge" class="btn btn-primary w-100 mb-2">
+                <i class="fas fa-plus me-2"></i>立即充值
+              </a>
+              <a href="/user/billing" class="btn btn-outline-primary w-100">
+                <i class="fas fa-file-invoice me-2"></i>账单明细
+              </a>
+            </div>
+          </div>
+
+          <!-- 账户信息 -->
+          <div class="card fade-in" style="animation-delay: 0.1s;">
+            <div class="card-header">
+              <i class="fas fa-info-circle me-2 text-pink"></i>账户信息
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <small class="text-muted">用户ID</small>
+                <div class="fw-600"><code>{{user.id}}</code></div>
+              </div>
+              <div class="mb-3">
+                <small class="text-muted">注册时间</small>
+                <div>{{user.createdAt}}</div>
+              </div>
+              <div class="mb-3">
+                <small class="text-muted">最后登录</small>
+                <div>{{user.lastLoginAt}}</div>
+              </div>
+              <div class="mb-0">
+                <small class="text-muted">账户状态</small>
+                <div>
+                  {{#if (eq user.status 'active')}}
+                    <span class="badge bg-success">正常</span>
+                  {{else}}
+                    <span class="badge bg-danger">异常</span>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} - LimeNode 清柠云</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  {{> header}}
+
+  <div class="limenode-body">
+    {{> sidebar}}
+
+    <main class="limenode-main">
+      <div class="page-header fade-in">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h1 class="page-title">
+              <i class="fas fa-wallet me-2 text-pink"></i>账户充值
+            </h1>
+            <p class="page-subtitle">当前余额: <span class="text-pink fw-bold">¥{{balance}}</span></p>
+          </div>
+          <a href="/user/billing" class="btn btn-outline-primary">
+            <i class="fas fa-arrow-left me-2"></i>返回账单
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card mb-4 fade-in">
+            <div class="card-header">
+              <i class="fas fa-credit-card me-2 text-pink"></i>选择充值金额
+            </div>
+            <div class="card-body">
+              <div class="row g-3 mb-4">
+                <div class="col-md-3 col-6">
+                  <label class="recharge-amount">
+                    <input type="radio" name="amount" value="10">
+                    <div class="recharge-card">
+                      <div class="fs-4 fw-bold">¥10</div>
+                      <small class="text-muted">基础充值</small>
+                    </div>
+                  </label>
+                </div>
+                <div class="col-md-3 col-6">
+                  <label class="recharge-amount">
+                    <input type="radio" name="amount" value="50">
+                    <div class="recharge-card">
+                      <div class="fs-4 fw-bold">¥50</div>
+                      <small class="text-muted">标准充值</small>
+                    </div>
+                  </label>
+                </div>
+                <div class="col-md-3 col-6">
+                  <label class="recharge-amount">
+                    <input type="radio" name="amount" value="100" checked>
+                    <div class="recharge-card selected">
+                      <div class="fs-4 fw-bold">¥100</div>
+                      <small class="text-muted">常用充值</small>
+                    </div>
+                  </label>
+                </div>
+                <div class="col-md-3 col-6">
+                  <label class="recharge-amount">
+                    <input type="radio" name="amount" value="500">
+                    <div class="recharge-card">
+                      <div class="fs-4 fw-bold">¥500</div>
+                      <small class="text-muted">大额充值</small>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label">自定义金额</label>
+                <div class="input-group" style="max-width: 300px;">
+                  <span class="input-group-text">¥</span>
+                  <input type="number" class="form-control" id="customAmount" placeholder="输入金额" min="1" max="10000">
+                </div>
+              </div>
+
+              <button class="btn btn-primary btn-lg" onclick="recharge()">
+                <i class="fas fa-bolt me-2"></i>立即充值
+              </button>
+            </div>
+          </div>
+
+          <div class="card fade-in" style="animation-delay: 0.1s;">
+            <div class="card-header">
+              <i class="fas fa-info-circle me-2 text-pink"></i>充值说明
+            </div>
+            <div class="card-body">
+              <ul class="mb-0">
+                <li>充值金额将实时到账，到账后可直接用于购买服务</li>
+                <li>支持支付宝、微信支付等主流支付方式</li>
+                <li>充值金额不可提现，可用于平台所有服务消费</li>
+                <li>如有充值问题，请联系客服</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card fade-in sticky-top" style="top: 80px;">
+            <div class="card-header">
+              <i class="fas fa-receipt me-2 text-pink"></i>充值摘要
+            </div>
+            <div class="card-body">
+              <div class="text-center mb-4">
+                <div class="text-muted mb-2">充值金额</div>
+                <div class="fs-2 fw-bold text-pink" id="rechargeAmount">¥100</div>
+              </div>
+              <div class="d-grid gap-2">
+                <button class="btn btn-outline-primary" disabled>
+                  <i class="fab fa-alipay me-2"></i>支付宝支付
+                </button>
+                <button class="btn btn-outline-success" disabled>
+                  <i class="fab fa-weixin me-2"></i>微信支付
+                </button>
+                <button class="btn btn-primary" onclick="recharge()">
+                  <i class="fas fa-coins me-2"></i>模拟充值 (测试用)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <style>
+    .recharge-amount input { display: none; }
+    .recharge-card {
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .recharge-card:hover { border-color: var(--primary-color); }
+    .recharge-card.selected {
+      border-color: var(--primary-color);
+      background: linear-gradient(135deg, var(--primary-light), var(--bg-secondary));
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    let selectedAmount = 100;
+
+    document.querySelectorAll('input[name="amount"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        selectedAmount = parseInt(this.value);
+        document.getElementById('rechargeAmount').textContent = '¥' + selectedAmount;
+        document.getElementById('customAmount').value = '';
+        document.querySelectorAll('.recharge-card').forEach(card => card.classList.remove('selected'));
+        this.closest('.recharge-card').classList.add('selected');
+      });
+    });
+
+    document.getElementById('customAmount').addEventListener('input', function() {
+      if (this.value) {
+        selectedAmount = parseInt(this.value);
+        document.getElementById('rechargeAmount').textContent = '¥' + selectedAmount;
+        document.querySelectorAll('input[name="amount"]').forEach(r => r.checked = false);
+      }
+    });
+
+    async function recharge() {
+      if (!selectedAmount || selectedAmount <= 0) {
+        Toast.error('请输入正确的充值金额');
+        return;
+      }
+
+      try {
+        const result = await API.post('/user/recharge', { amount: selectedAmount });
+        if (result.success) {
+          Toast.success('充值成功！');
+          setTimeout(() => window.location.href = '/user/billing', 1500);
+        } else {
+          Toast.error(result.message);
+        }
+      } catch (error) {
+        Toast.error('充值失败，请稍后重试');
+      }
+    }
+  </script>
+</body>
+</html>

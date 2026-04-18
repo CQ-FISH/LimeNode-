@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} - LimeNode 清柠云</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  {{> header}}
+
+  <div class="limenode-body">
+    {{> sidebar}}
+
+    <main class="limenode-main">
+      <div class="page-header fade-in">
+        <h1 class="page-title">
+          <i class="fas fa-shield-alt me-2 text-pink"></i>安全管理
+        </h1>
+        <p class="page-subtitle">保护您的云服务器安全</p>
+      </div>
+
+      <!-- 安全统计 -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <div class="stat-card text-center fade-in">
+            <div class="stat-icon green mx-auto">
+              <i class="fas fa-shield-virus"></i>
+            </div>
+            <div class="stat-value mt-3 text-success">{{stats.securityScore}}</div>
+            <div class="stat-label">安全评分</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-card text-center fade-in" style="animation-delay: 0.1s;">
+            <div class="stat-icon pink mx-auto">
+              <i class="fas fa-skull-crossbones"></i>
+            </div>
+            <div class="stat-value mt-3">{{stats.totalThreats}}</div>
+            <div class="stat-label">检测威胁</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-card text-center fade-in" style="animation-delay: 0.2s;">
+            <div class="stat-icon blue mx-auto">
+              <i class="fas fa-ban"></i>
+            </div>
+            <div class="stat-value mt-3">{{stats.blockedAttacks}}</div>
+            <div class="stat-label">拦截攻击</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8">
+          <!-- 安全防护 -->
+          <div class="card mb-4 fade-in" style="animation-delay: 0.3s;">
+            <div class="card-header">
+              <i class="fas fa-lock me-2 text-pink"></i>服务防护状态
+            </div>
+            <div class="card-body p-0">
+              {{#if services.length}}
+              <table class="table mb-0">
+                <thead>
+                  <tr>
+                    <th>服务</th>
+                    <th>防护等级</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each services}}
+                  <tr>
+                    <td>
+                      <div class="fw-600">{{productName}}</div>
+                      <small class="text-muted">{{id}}</small>
+                    </td>
+                    <td>
+                      <select class="form-select form-select-sm" onchange="updateProtection('{{id}}', this.value)" style="width: auto;">
+                        <option value="none" {{#if (eq protection 'none')}}selected{{/if}}>无防护</option>
+                        <option value="basic" {{#if (eq protection 'basic')}}selected{{/if}}>基础防护</option>
+                        <option value="advanced" {{#if (eq protection 'advanced')}}selected{{/if}}>高级防护</option>
+                        <option value="enterprise" {{#if (eq protection 'enterprise')}}selected{{/if}}>企业防护</option>
+                      </select>
+                    </td>
+                    <td>
+                      <span class="badge bg-success">
+                        <i class="fas fa-check-circle me-1"></i>正常
+                      </span>
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary" onclick="runSecurityScan('{{id}}')">
+                        <i class="fas fa-search"></i>扫描
+                      </button>
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              {{else}}
+              <div class="empty-state py-4">
+                <i class="fas fa-server"></i>
+                <h3>暂无服务</h3>
+                <p>购买服务后可进行安全管理</p>
+                <a href="/product/mall" class="btn btn-primary">前往购买</a>
+              </div>
+              {{/if}}
+            </div>
+          </div>
+
+          <!-- 安全日志 -->
+          <div class="card fade-in" style="animation-delay: 0.4s;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span><i class="fas fa-history me-2 text-pink"></i>最近安全日志</span>
+              <a href="/security/logs" class="btn btn-sm btn-outline-primary">查看全部</a>
+            </div>
+            <div class="card-body p-0">
+              {{#if logs.length}}
+              <table class="table mb-0">
+                <thead>
+                  <tr>
+                    <th>时间</th>
+                    <th>类型</th>
+                    <th>级别</th>
+                    <th>描述</th>
+                    <th>来源IP</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each logs}}
+                  <tr>
+                    <td><small>{{createdAt}}</small></td>
+                    <td>
+                      {{#if (eq type 'firewall')}}
+                        <span class="badge bg-info">防火墙</span>
+                      {{else if (eq type 'scan')}}
+                        <span class="badge bg-primary">扫描</span>
+                      {{else if (eq type 'protection')}}
+                        <span class="badge bg-success">防护</span>
+                      {{else}}
+                        <span class="badge bg-secondary">其他</span>
+                      {{/if}}
+                    </td>
+                    <td>
+                      {{#if (eq level 'danger')}}
+                        <span class="badge bg-danger">危险</span>
+                      {{else if (eq level 'warning')}}
+                        <span class="badge bg-warning text-dark">警告</span>
+                      {{else}}
+                        <span class="badge bg-info">正常</span>
+                      {{/if}}
+                    </td>
+                    <td><small>{{message}}</small></td>
+                    <td><code>{{ip}}</code></td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              {{else}}
+              <div class="empty-state py-4">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>暂无日志</h3>
+                <p>安全日志将显示在这里</p>
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <!-- 安全建议 -->
+          <div class="card mb-4 fade-in" style="animation-delay: 0.5s;">
+            <div class="card-header">
+              <i class="fas fa-lightbulb me-2 text-pink"></i>安全建议
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <div class="d-flex align-items-start">
+                  <div class="stat-icon green me-3" style="width: 36px; height: 36px; font-size: 14px;">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div>
+                    <h6>定期更改密码</h6>
+                    <small class="text-muted">建议每90天更换一次服务器密码</small>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex align-items-start">
+                  <div class="stat-icon green me-3" style="width: 36px; height: 36px; font-size: 14px;">
+                    <i class="fas fa-check"></i>
+                  </div>
+                  <div>
+                    <h6>启用防火墙</h6>
+                    <small class="text-muted">确保防火墙规则正确配置</small>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="d-flex align-items-start">
+                  <div class="stat-icon orange me-3" style="width: 36px; height: 36px; font-size: 14px;">
+                    <i class="fas fa-exclamation"></i>
+                  </div>
+                  <div>
+                    <h6>关闭不必要的端口</h6>
+                    <small class="text-muted">只开放必要的服务端口</small>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-0">
+                <div class="d-flex align-items-start">
+                  <div class="stat-icon pink me-3" style="width: 36px; height: 36px; font-size: 14px;">
+                    <i class="fas fa-certificate"></i>
+                  </div>
+                  <div>
+                    <h6>启用SSL证书</h6>
+                    <small class="text-muted">为您的网站启用HTTPS加密</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 快速操作 -->
+          <div class="card fade-in" style="animation-delay: 0.6s;">
+            <div class="card-header">
+              <i class="fas fa-bolt me-2 text-pink"></i>快速操作
+            </div>
+            <div class="card-body">
+              <div class="d-grid gap-2">
+                <a href="/product/detail/sec-002" class="btn btn-outline-primary">
+                  <i class="fas fa-shield-alt me-2"></i>升级防护
+                </a>
+                <button class="btn btn-outline-primary" onclick="refreshSecurityStatus()">
+                  <i class="fas fa-sync me-2"></i>刷新安全状态
+                </button>
+                <a href="/network" class="btn btn-outline-primary">
+                  <i class="fas fa-network-wired me-2"></i>网络设置
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    async function refreshSecurityStatus() {
+      try {
+        const result = await API.get('/security/status');
+        if (result.success) {
+          Toast.success('安全状态已刷新');
+        }
+      } catch (error) {
+        Toast.error('刷新失败');
+      }
+    }
+
+    async function runSecurityScan(serviceId) {
+      Toast.info('正在扫描，请稍候...');
+      try {
+        const result = await API.post('/security/scan', { serviceId });
+        if (result.success) {
+          Toast.success('扫描完成');
+          setTimeout(() => window.location.reload(), 1500);
+        } else {
+          Toast.error(result.message);
+        }
+      } catch (error) {
+        Toast.error('扫描失败');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{{! 侧边栏模板 }}
+<div class="limenode-sidebar">
+  <div class="sidebar-menu">
+    <div class="menu-section">
+      <a href="/console" class="menu-item {{#if (eq path '/console')}}active{{/if}}">
+        <i class="fas fa-chart-line"></i>
+        <span>总览</span>
+      </a>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-title">服务管理</div>
+      <a href="/service" class="menu-item {{#if (eq path '/service')}}active{{/if}}">
+        <i class="fas fa-server"></i>
+        <span>我的服务</span>
+      </a>
+      <a href="/product/mall" class="menu-item {{#if (eq path '/product/mall')}}active{{/if}}">
+        <i class="fas fa-shopping-bag"></i>
+        <span>服务商城</span>
+      </a>
+      <a href="/cart" class="menu-item {{#if (eq path '/cart')}}active{{/if}}">
+        <i class="fas fa-shopping-cart"></i>
+        <span>购物车</span>
+      </a>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-title">订单管理</div>
+      <a href="/order" class="menu-item {{#if (eq path '/order')}}active{{/if}}">
+        <i class="fas fa-file-invoice"></i>
+        <span>订单列表</span>
+      </a>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-title">网络与安全</div>
+      <a href="/network" class="menu-item {{#if (eq path '/network')}}active{{/if}}">
+        <i class="fas fa-network-wired"></i>
+        <span>网络管理</span>
+      </a>
+      <a href="/security" class="menu-item {{#if (eq path '/security')}}active{{/if}}">
+        <i class="fas fa-shield-alt"></i>
+        <span>安全管理</span>
+      </a>
+    </div>
+
+    <div class="menu-section">
+      <div class="menu-title">账户</div>
+      <a href="/user/profile" class="menu-item {{#if (eq path '/user/profile')}}active{{/if}}">
+        <i class="fas fa-user-cog"></i>
+        <span>个人中心</span>
+      </a>
+      <a href="/user/billing" class="menu-item {{#if (eq path '/user/billing')}}active{{/if}}">
+        <i class="fas fa-wallet"></i>
+        <span>账单与充值</span>
+      </a>
+    </div>
+  </div>
+</div>

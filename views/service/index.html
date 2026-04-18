@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} - LimeNode 清柠云</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  {{> header}}
+
+  <div class="limenode-body">
+    {{> sidebar}}
+
+    <main class="limenode-main">
+      <div class="page-header fade-in">
+        <h1 class="page-title">
+          <i class="fas fa-server me-2 text-pink"></i>我的服务
+        </h1>
+        <p class="page-subtitle">管理您所有的云服务器和服务</p>
+      </div>
+
+      <!-- 统计 -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <div class="stat-card text-center fade-in">
+            <div class="stat-value text-pink">{{stats.total}}</div>
+            <div class="stat-label">总服务数</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-card text-center fade-in" style="animation-delay: 0.1s;">
+            <div class="stat-value text-success">{{stats.running}}</div>
+            <div class="stat-label">运行中</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-card text-center fade-in" style="animation-delay: 0.2s;">
+            <div class="stat-value text-secondary">{{stats.stopped}}</div>
+            <div class="stat-label">已关机</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 服务列表 -->
+      <div class="card fade-in" style="animation-delay: 0.3s;">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span><i class="fas fa-list me-2 text-pink"></i>服务列表</span>
+          <a href="/product/mall" class="btn btn-sm btn-primary">
+            <i class="fas fa-plus me-1"></i>购买服务
+          </a>
+        </div>
+        <div class="card-body p-0">
+          {{#if services.length}}
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th>服务ID</th>
+                  <th>服务名称</th>
+                  <th>配置</th>
+                  <th>IP地址</th>
+                  <th>状态</th>
+                  <th>到期时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each services}}
+                <tr>
+                  <td><code>{{id}}</code></td>
+                  <td>
+                    <div class="fw-600">{{productName}}</div>
+                  </td>
+                  <td>
+                    <small>
+                      {{specs.cpu}} / {{specs.ram}}<br>
+                      {{specs.disk}}
+                    </small>
+                  </td>
+                  <td><code>{{ip}}</code></td>
+                  <td>
+                    <span class="status-dot {{status}}"></span>
+                    {{#if (eq status 'running')}}
+                      <span class="badge bg-success">运行中</span>
+                    {{else}}
+                      <span class="badge bg-secondary">已关机</span>
+                    {{/if}}
+                  </td>
+                  <td><small>{{expireAt}}</small></td>
+                  <td>
+                    <div class="btn-group">
+                      <a href="/service/detail/{{id}}" class="btn btn-sm btn-outline-primary">
+                        <i class="fas fa-eye"></i>
+                      </a>
+                      {{#if (eq status 'running')}}
+                        <button class="btn btn-sm btn-outline-warning" onclick="serviceAction('stop', '{{id}}', this)">
+                          <i class="fas fa-power-off"></i>
+                        </button>
+                      {{else}}
+                        <button class="btn btn-sm btn-outline-success" onclick="serviceAction('start', '{{id}}', this)">
+                          <i class="fas fa-play"></i>
+                        </button>
+                      {{/if}}
+                    </div>
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+          {{else}}
+          <div class="empty-state">
+            <i class="fas fa-server"></i>
+            <h3>暂无服务</h3>
+            <p>您还没有购买任何云服务器</p>
+            <a href="/product/mall" class="btn btn-primary">
+              <i class="fas fa-shopping-bag me-2"></i>前往购买
+            </a>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

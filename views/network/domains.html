@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} - LimeNode 清柠云</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  {{> header}}
+
+  <div class="limenode-body">
+    {{> sidebar}}
+
+    <main class="limenode-main">
+      <div class="page-header fade-in">
+        <h1 class="page-title">
+          <i class="fas fa-globe me-2 text-pink"></i>域名管理
+        </h1>
+        <p class="page-subtitle">管理您的域名列表</p>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span><i class="fas fa-list me-2 text-pink"></i>域名列表</span>
+          <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDomainModal">
+            <i class="fas fa-plus me-1"></i>添加域名
+          </button>
+        </div>
+        <div class="card-body p-0">
+          {{#if domains.length}}
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th>域名</th>
+                  <th>类型</th>
+                  <th>目标</th>
+                  <th>状态</th>
+                  <th>添加时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each domains}}
+                <tr>
+                  <td><code>{{domain}}</code></td>
+                  <td>
+                    {{#if (eq type 'forward')}}
+                      <span class="badge bg-primary">转发</span>
+                    {{else}}
+                      <span class="badge bg-info">绑定</span>
+                    {{/if}}
+                  </td>
+                  <td><small>{{target}}</small></td>
+                  <td>
+                    {{#if (eq status 'active')}}
+                      <span class="badge bg-success">正常</span>
+                    {{else}}
+                      <span class="badge bg-secondary">禁用</span>
+                    {{/if}}
+                  </td>
+                  <td><small>{{createdAt}}</small></td>
+                  <td>
+                    <button class="btn btn-sm btn-outline-danger" onclick="deleteDomain('{{id}}')">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+          {{else}}
+          <div class="empty-state">
+            <i class="fas fa-globe"></i>
+            <h3>暂无域名</h3>
+            <p>添加您的第一个域名</p>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDomainModal">
+              <i class="fas fa-plus me-2"></i>添加域名
+            </button>
+          </div>
+          {{/if}}
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal fade" id="addDomainModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fas fa-plus me-2 text-pink"></i>添加域名</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form action="/network/domain/add" method="POST" class="form-ajax">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">域名</label>
+              <input type="text" class="form-control" name="domain" placeholder="example.com" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">类型</label>
+              <select class="form-select" name="type">
+                <option value="forward">域名转发</option>
+                <option value="bind">IP绑定</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">目标 (选填)</label>
+              <input type="text" class="form-control" name="target" placeholder="指向的服务地址">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-primary">添加</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} - LimeNode 清柠云</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  {{> header}}
+
+  <div class="limenode-body">
+    {{> sidebar}}
+
+    <main class="limenode-main">
+      <div class="page-header fade-in">
+        <h1 class="page-title">
+          <i class="fas fa-network-wired me-2 text-pink"></i>网络管理
+        </h1>
+        <p class="page-subtitle">管理您的域名和反向代理配置</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- 域名管理 -->
+        <div class="col-lg-6">
+          <div class="card fade-in">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span><i class="fas fa-globe me-2 text-pink"></i>域名管理</span>
+              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addDomainModal">
+                <i class="fas fa-plus me-1"></i>添加域名
+              </button>
+            </div>
+            <div class="card-body p-0">
+              {{#if domains.length}}
+              <div class="table-responsive">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th>域名</th>
+                      <th>类型</th>
+                      <th>状态</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each domains}}
+                    <tr>
+                      <td><code>{{domain}}</code></td>
+                      <td>
+                        {{#if (eq type 'forward')}}
+                          <span class="badge bg-primary">转发</span>
+                        {{else}}
+                          <span class="badge bg-info">绑定</span>
+                        {{/if}}
+                      </td>
+                      <td>
+                        {{#if (eq status 'active')}}
+                          <span class="badge bg-success">正常</span>
+                        {{else}}
+                          <span class="badge bg-secondary">禁用</span>
+                        {{/if}}
+                      </td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteDomain('{{id}}')">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+              {{else}}
+              <div class="empty-state py-4">
+                <i class="fas fa-globe"></i>
+                <h3>暂无域名</h3>
+                <p>添加您的第一个域名</p>
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+
+        <!-- 反向代理 -->
+        <div class="col-lg-6">
+          <div class="card fade-in" style="animation-delay: 0.1s;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span><i class="fas fa-exchange-alt me-2 text-pink"></i>反向代理</span>
+              <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addProxyModal">
+                <i class="fas fa-plus me-1"></i>添加代理
+              </button>
+            </div>
+            <div class="card-body p-0">
+              {{#if proxies.length}}
+              <div class="table-responsive">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th>名称</th>
+                      <th>域名</th>
+                      <th>目标URL</th>
+                      <th>SSL</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each proxies}}
+                    <tr>
+                      <td>{{name}}</td>
+                      <td><code>{{domain}}</code></td>
+                      <td><small>{{targetUrl}}</small></td>
+                      <td>
+                        {{#if ssl}}
+                          <span class="badge bg-success">启用</span>
+                        {{else}}
+                          <span class="badge bg-secondary">禁用</span>
+                        {{/if}}
+                      </td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteProxy('{{id}}')">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+              {{else}}
+              <div class="empty-state py-4">
+                <i class="fas fa-exchange-alt"></i>
+                <h3>暂无反向代理</h3>
+                <p>创建您的第一个反向代理配置</p>
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 弹性公网IP -->
+      <div class="card mt-4 fade-in" style="animation-delay: 0.2s;">
+        <div class="card-header">
+          <i class="fas fa-ip fs-6 me-2 text-pink"></i>弹性公网IP
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="stat-card">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="text-muted small">已绑定IP</div>
+                    <div class="fs-4 fw-bold">{{domains.length}}</div>
+                  </div>
+                  <div class="stat-icon pink">
+                    <i class="fas fa-link"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="stat-card">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="text-muted small">可用IP</div>
+                    <div class="fs-4 fw-bold">5</div>
+                  </div>
+                  <div class="stat-icon green">
+                    <i class="fas fa-unlink"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <a href="/product/detail/net-001" class="btn btn-outline-primary w-100 py-3">
+                <i class="fas fa-plus me-2"></i>购买弹性IP
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 添加域名模态框 -->
+  <div class="modal fade" id="addDomainModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fas fa-plus me-2 text-pink"></i>添加域名</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form action="/network/domain/add" method="POST" class="form-ajax">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">域名</label>
+              <input type="text" class="form-control" name="domain" placeholder="example.com" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">类型</label>
+              <select class="form-select" name="type">
+                <option value="forward">域名转发</option>
+                <option value="bind">IP绑定</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">目标 (选填)</label>
+              <input type="text" class="form-control" name="target" placeholder="指向的服务地址">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-primary">添加</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 添加反向代理模态框 -->
+  <div class="modal fade" id="addProxyModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fas fa-plus me-2 text-pink"></i>添加反向代理</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form action="/network/proxy/add" method="POST" class="form-ajax">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">名称</label>
+              <input type="text" class="form-control" name="name" placeholder="代理名称" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">域名</label>
+              <input type="text" class="form-control" name="domain" placeholder="proxy.example.com" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">目标URL</label>
+              <input type="text" class="form-control" name="targetUrl" placeholder="http://127.0.0.1:8080" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">路径 (选填)</label>
+              <input type="text" class="form-control" name="path" value="/" placeholder="/">
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="sslCheck" name="ssl" value="true">
+                <label class="form-check-label" for="sslCheck">启用SSL</label>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+            <button type="submit" class="btn btn-primary">添加</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,511 @@
+{
+  "users": [
+    {
+      "id": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "username": "17840523301",
+      "password": "$2a$10$Byn3cmlRZbNW8/XGC0Q19O5pGpiB1LMyfbxfu/.jQetdLGsyPA5cu",
+      "email": "18377377913@163.com",
+      "phone": "18377377913",
+      "level": "free",
+      "balance": 8.000000000000001e+40,
+      "realname": "",
+      "idCard": "",
+      "status": "active",
+      "createdAt": "2026-04-18T01:25:18.263Z",
+      "lastLoginAt": "2026-04-18T01:29:14.600Z",
+      "updatedAt": "2026-04-18T01:30:38.880Z"
+    }
+  ],
+  "products": [
+    {
+      "id": "svs-001",
+      "name": "轻量云服务器",
+      "category": "compute",
+      "type": "cloud_server",
+      "description": "高性能云服务器，适合网站和应用部署",
+      "price": 29.9,
+      "period": "month",
+      "specs": {
+        "cpu": "2核",
+        "ram": "2GB",
+        "disk": "40GB SSD",
+        "bandwidth": "5Mbps",
+        "traffic": "500GB/月"
+      },
+      "stock": 100,
+      "status": "active",
+      "createdAt": "2026-04-18T01:18:39.410Z"
+    },
+    {
+      "id": "svs-002",
+      "name": "标准云服务器",
+      "category": "compute",
+      "type": "cloud_server",
+      "description": "大内存大带宽，适合企业级应用",
+      "price": 99.9,
+      "period": "month",
+      "specs": {
+        "cpu": "4核",
+        "ram": "8GB",
+        "disk": "100GB SSD",
+        "bandwidth": "20Mbps",
+        "traffic": "2TB/月"
+      },
+      "stock": 50,
+      "status": "active",
+      "createdAt": "2026-04-18T01:18:39.410Z"
+    },
+    {
+      "id": "svs-003",
+      "name": "旗舰云服务器",
+      "category": "compute",
+      "type": "cloud_server",
+      "description": "顶配服务器，适合大型网站和复杂应用",
+      "price": 299.9,
+      "period": "month",
+      "specs": {
+        "cpu": "8核",
+        "ram": "32GB",
+        "disk": "500GB SSD",
+        "bandwidth": "100Mbps",
+        "traffic": "无限流量"
+      },
+      "stock": 20,
+      "status": "active",
+      "createdAt": "2026-04-18T01:18:39.410Z"
+    },
+    {
+      "id": "sto-001",
+      "name": "对象存储 100GB",
+      "category": "storage",
+      "type": "object_storage",
+      "description": "海量存储空间，适合文件备份和分发",
+      "price": 9.9,
+      "period": "month",
+      "specs": {
+        "capacity": "100GB",
+        "traffic": "包含",
+        "backup": "自动备份"
+      },
+      "stock": 999,
+      "status": "active",
+      "createdAt": "2026-04-18T01:18:39.410Z"
+    },
+    {
+      "id": "sto-002",
+      "name": "对象存储 500GB",
+      "category": "storage",
+      "type": "object_storage",
+      "description": "大容量存储方案，适合企业用户",
+      "price": 39.9,
+      "period": "month",
+      "specs": {
+        "capacity": "500GB",
+        "traffic": "包含",
+        "backup": "自动备份"
+      },
+      "stock": 999,
+      "status": "active",
+      "createdAt": "2026-04-18T01:18:39.410Z"
+    },
+    {
+      "id": "net-001",
+      "name": "弹性公网IP",
+      "category": "network",
+      "type": "eip",
+      "description": "独立公网IP地址，支持绑定和解绑",
+      "price": 5.9,
+      "period": "month",
+      "specs": {
+        "bandwidth": "5Mbps",
+        "traffic": "按量计费"
+      },
+      "stock": 500,
+      "status": "active",
+      "createdAt": "2026-04-18T01:18:39.410Z"
+    },
+    {
+      "id": "net-002",
+      "name": "域名注册",
+      "category": "network",
+      "type": "domain",
+      "description": "提供主流域名注册服务",
+      "price": 29.9,
+      "period": "year",
+      "specs": {
+        "tld": ".com/.cn/.net",
+        "dns": "免费DNS",
+        "ssl": "免费SSL证书"
+      },
+      "stock": 999,
+      "status": "active",
+      "createdAt": "2026-04-18T01:18:39.410Z"
+    },
+    {
+      "id": "sec-001",
+      "name": "基础防护",
+      "category": "security",
+      "type": "firewall",
+      "description": "DDoS基础防护，保护服务器安全",
+      "price": 0,
+      "period": "month",
+      "specs": {
+        "ddos": "10Gbps",
+        "firewall": "基础规则",
+        "log": "7天日志"
+      },
+      "stock": 999,
+      "status": "active",
+      "createdAt": "2026-04-18T01:18:39.410Z"
+    },
+    {
+      "id": "sec-002",
+      "name": "企业防护",
+      "category": "security",
+      "type": "firewall",
+      "description": "企业级DDoS防护，完整安全服务",
+      "price": 99.9,
+      "period": "month",
+      "specs": {
+        "ddos": "100Gbps",
+        "firewall": "高级规则",
+        "log": "30天日志",
+        "waf": "Web应用防火墙"
+      },
+      "stock": 100,
+      "status": "active",
+      "createdAt": "2026-04-18T01:18:39.410Z"
+    }
+  ],
+  "cart": [],
+  "orders": [
+    {
+      "id": "ORD1776475796915",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "items": [
+        {
+          "productId": "sec-001",
+          "productName": "基础防护",
+          "price": 0,
+          "period": "month",
+          "quantity": 1
+        },
+        {
+          "productId": "sec-002",
+          "productName": "企业防护",
+          "price": 99.9,
+          "period": "month",
+          "quantity": 1
+        },
+        {
+          "productId": "net-002",
+          "productName": "域名注册",
+          "price": 29.9,
+          "period": "year",
+          "quantity": 1
+        },
+        {
+          "productId": "net-001",
+          "productName": "弹性公网IP",
+          "price": 5.9,
+          "period": "month",
+          "quantity": 1
+        },
+        {
+          "productId": "sto-002",
+          "productName": "对象存储 500GB",
+          "price": 39.9,
+          "period": "month",
+          "quantity": 1
+        },
+        {
+          "productId": "svs-003",
+          "productName": "旗舰云服务器",
+          "price": 299.9,
+          "period": "month",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 475.5,
+      "paymentMethod": "balance",
+      "status": "paid",
+      "createdAt": "2026-04-18T01:29:56.915Z",
+      "paidAt": "2026-04-18T01:29:56.915Z"
+    }
+  ],
+  "services": [
+    {
+      "id": "SVS1776475796921mdl4og",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "orderId": "ORD1776475796915",
+      "productId": "svs-003",
+      "productName": "旗舰云服务器",
+      "specs": {
+        "cpu": "8核",
+        "ram": "32GB",
+        "disk": "500GB SSD",
+        "bandwidth": "100Mbps",
+        "traffic": "无限流量"
+      },
+      "status": "running",
+      "ip": "192.168.162.159",
+      "createdAt": "2026-04-18T01:29:56.921Z",
+      "expireAt": "2026-05-18T01:29:56.921Z"
+    }
+  ],
+  "domains": [],
+  "proxies": [],
+  "securityLogs": [],
+  "bills": [
+    {
+      "id": "92e56099-7d9b-4093-8bd0-820170b3de04",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 100,
+      "balance": 200,
+      "description": "账户充值 100 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:29:26.833Z"
+    },
+    {
+      "id": "2281c578-0c1f-43f8-818b-069b6971ebdf",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 700,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:29:52.143Z"
+    },
+    {
+      "id": "4fa892e9-1c07-4660-bc22-5f02310386f8",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "consumption",
+      "amount": -475.5,
+      "balance": -251,
+      "description": "订单支付 ORD1776475796915",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:29:56.922Z"
+    },
+    {
+      "id": "476d6500-4284-44a8-9e3c-a2d3c0499867",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 724.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:22.685Z"
+    },
+    {
+      "id": "91abb5db-3690-43ce-a119-e42c1f9dec47",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 1224.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:23.538Z"
+    },
+    {
+      "id": "28db8ab2-e69a-45bc-a1c6-5957d9ef7abe",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 1724.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:24.003Z"
+    },
+    {
+      "id": "c0c4ca5f-cc9d-4e5d-8738-dfd433a71e0c",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 2224.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:24.189Z"
+    },
+    {
+      "id": "d5c342bb-df10-473e-9a6c-3f22b4f4f9f6",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 2724.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:27.333Z"
+    },
+    {
+      "id": "ae845c6d-b2fb-4355-915d-bd1370a1c17d",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 3224.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:27.489Z"
+    },
+    {
+      "id": "c42eef64-4c6a-4d18-82ef-bf69ffd56c0d",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 3724.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:27.632Z"
+    },
+    {
+      "id": "5a25bacf-9575-4043-bfc2-ea253dc0f16c",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 4224.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:27.790Z"
+    },
+    {
+      "id": "d7946407-5349-4a53-bc65-e9456c1d4984",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 4724.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:27.939Z"
+    },
+    {
+      "id": "f071ba99-d196-420e-bf13-709306b02d54",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 5224.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:28.133Z"
+    },
+    {
+      "id": "1de97153-928d-4798-a979-bd2c1bacc522",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 5724.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:28.299Z"
+    },
+    {
+      "id": "cfb421ce-8cc0-4790-b17b-2a4c0b8f0532",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 6224.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:28.472Z"
+    },
+    {
+      "id": "8c1da2d2-a3e9-43fb-8dce-7b9f639d01ac",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 6724.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:28.652Z"
+    },
+    {
+      "id": "fb4c6e2e-c86d-4fb3-a8aa-c7a7543adf05",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 500,
+      "balance": 7224.5,
+      "description": "账户充值 500 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:28.800Z"
+    },
+    {
+      "id": "540c6ef7-311f-42c4-bff7-710f2bac8fce",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 1e+40,
+      "balance": 1e+40,
+      "description": "账户充值 1e+40 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:37.773Z"
+    },
+    {
+      "id": "fa90c1ba-529b-44ef-b434-ecd51ce162b3",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 1e+40,
+      "balance": 2e+40,
+      "description": "账户充值 1e+40 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:37.937Z"
+    },
+    {
+      "id": "9ef9135d-1083-4252-9a1f-225c419caf39",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 1e+40,
+      "balance": 3e+40,
+      "description": "账户充值 1e+40 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:38.087Z"
+    },
+    {
+      "id": "e516bdd7-e0c7-4530-830a-f8845b5553e1",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 1e+40,
+      "balance": 4e+40,
+      "description": "账户充值 1e+40 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:38.251Z"
+    },
+    {
+      "id": "790980fe-8b12-4941-801b-1af5781c37dd",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 1e+40,
+      "balance": 5e+40,
+      "description": "账户充值 1e+40 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:38.409Z"
+    },
+    {
+      "id": "16788813-222d-4952-b5c4-290865f2a257",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 1e+40,
+      "balance": 6e+40,
+      "description": "账户充值 1e+40 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:38.573Z"
+    },
+    {
+      "id": "8b35c150-582e-44f4-b94d-04eb130c681f",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 1e+40,
+      "balance": 7.000000000000001e+40,
+      "description": "账户充值 1e+40 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:38.746Z"
+    },
+    {
+      "id": "f0bb0a4a-aed0-45cc-ba8b-bf7b6e733094",
+      "userId": "e6fa3bd1-8ef3-44f3-879c-be9de13f9f39",
+      "type": "recharge",
+      "amount": 1e+40,
+      "balance": 8.000000000000001e+40,
+      "description": "账户充值 1e+40 元",
+      "status": "completed",
+      "createdAt": "2026-04-18T01:30:38.882Z"
+    }
+  ]
+}

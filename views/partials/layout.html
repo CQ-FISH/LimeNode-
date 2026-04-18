@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} - LimeNode 清柠云</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- 顶部导航栏 -->
+  <nav class="navbar navbar-expand-lg limenode-navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand limenode-logo" href="/console">
+        <i class="fas fa-lemon"></i> LimeNode
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/console">
+              <i class="fas fa-home"></i> 总览
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/product/mall">
+              <i class="fas fa-store"></i> 服务商城
+            </a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+              <i class="fas fa-globe"></i> 地区
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">华北 - 北京</a></li>
+              <li><a class="dropdown-item" href="#">华东 - 上海</a></li>
+              <li><a class="dropdown-item" href="#">华南 - 广州</a></li>
+              <li><a class="dropdown-item" href="#">香港</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#" title="消息">
+              <i class="fas fa-bell"></i>
+              <span class="badge bg-danger">3</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/cart" title="购物车">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="badge bg-danger cart-badge">{{#if user}}{{{cartCount}}}{{else}}0{{/if}}</span>
+            </a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle user-dropdown" href="#" data-bs-toggle="dropdown">
+              <i class="fas fa-user-circle"></i>
+              <span>{{#if user}}{{user.username}}{{else}}未登录{{/if}}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="/user/profile"><i class="fas fa-user"></i> 个人中心</a></li>
+              <li><a class="dropdown-item" href="/user/billing"><i class="fas fa-receipt"></i> 账单管理</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/auth/logout"><i class="fas fa-sign-out-alt"></i> 退出登录</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主体内容区 -->
+  <div class="limenode-body">
+    <div class="limenode-sidebar">
+      <div class="sidebar-menu">
+        <div class="menu-section">
+          <a href="/console" class="menu-item {{#if (eq path '/console')}}active{{/if}}">
+            <i class="fas fa-chart-line"></i>
+            <span>总览</span>
+          </a>
+        </div>
+
+        <div class="menu-section">
+          <div class="menu-title">服务管理</div>
+          <a href="/service" class="menu-item {{#if (eq path '/service')}}active{{/if}}">
+            <i class="fas fa-server"></i>
+            <span>我的服务</span>
+          </a>
+          <a href="/product/mall" class="menu-item {{#if (eq path '/product/mall')}}active{{/if}}">
+            <i class="fas fa-shopping-bag"></i>
+            <span>服务商城</span>
+          </a>
+          <a href="/cart" class="menu-item {{#if (eq path '/cart')}}active{{/if}}">
+            <i class="fas fa-shopping-cart"></i>
+            <span>购物车</span>
+          </a>
+        </div>
+
+        <div class="menu-section">
+          <div class="menu-title">订单管理</div>
+          <a href="/order" class="menu-item {{#if (eq path '/order')}}active{{/if}}">
+            <i class="fas fa-file-invoice"></i>
+            <span>订单列表</span>
+          </a>
+        </div>
+
+        <div class="menu-section">
+          <div class="menu-title">网络与安全</div>
+          <a href="/network" class="menu-item {{#if (eq path '/network')}}active{{/if}}">
+            <i class="fas fa-network-wired"></i>
+            <span>网络管理</span>
+          </a>
+          <a href="/security" class="menu-item {{#if (eq path '/security')}}active{{/if}}">
+            <i class="fas fa-shield-alt"></i>
+            <span>安全管理</span>
+          </a>
+        </div>
+
+        <div class="menu-section">
+          <div class="menu-title">账户</div>
+          <a href="/user/profile" class="menu-item {{#if (eq path '/user/profile')}}active{{/if}}">
+            <i class="fas fa-user-cog"></i>
+            <span>个人中心</span>
+          </a>
+          <a href="/user/billing" class="menu-item {{#if (eq path '/user/billing')}}active{{/if}}">
+            <i class="fas fa-wallet"></i>
+            <span>账单与充值</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <main class="limenode-main">
+      {{{body}}}
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

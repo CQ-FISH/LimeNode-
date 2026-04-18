@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LimeNode - 服务购物车</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>LimeNode <span>服务购物</span></h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="index.html#service">服务介绍</a>
+                <a href="index.html#pricing">价格套餐</a>
+                <a href="index.html#faq">常见问题</a>
+                <a href="index.html#contact">联系我们</a>
+            </div>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 购物车页面标题 -->
+    <section class="page-header">
+        <div class="container">
+            <h2>服务购物车</h2>
+            <p>选择您需要的服务，开始您的托管之旅</p>
+        </div>
+    </section>
+
+    <!-- 商品列表 -->
+    <section class="products">
+        <div class="container">
+            <div class="products-grid">
+                <!-- 静态网站托管 -->
+                <div class="product-card">
+                    <div class="product-icon">🌐</div>
+                    <h3>静态网站托管</h3>
+                    <div class="product-price">10 元 / 月</div>
+                    <ul class="product-features">
+                        <li>20GB 存储空间</li>
+                        <li>自定义域名绑定</li>
+                        <li>基础安全防护</li>
+                        <li>7×24 小时在线</li>
+                    </ul>
+                    <button class="add-to-cart" data-service="static" data-price="10">加入购物车</button>
+                </div>
+
+                <!-- 轻量虚拟主机 -->
+                <div class="product-card">
+                    <div class="product-icon">🖥️</div>
+                    <h3>轻量虚拟主机</h3>
+                    <div class="product-price">15 元 / 月</div>
+                    <ul class="product-features">
+                        <li>20GB 存储空间</li>
+                        <li>1 个 MySQL 数据库</li>
+                        <li>宝塔面板</li>
+                        <li>基础安全防护</li>
+                    </ul>
+                    <button class="add-to-cart" data-service="vhost" data-price="15">加入购物车</button>
+                </div>
+
+                <!-- 私人图床 -->
+                <div class="product-card">
+                    <div class="product-icon">🖼️</div>
+                    <h3>私人图床 / 素材存储</h3>
+                    <div class="product-price">8 元 / 月</div>
+                    <ul class="product-features">
+                        <li>无限上传</li>
+                        <li>外链可用</li>
+                        <li>图片 CDN 加速</li>
+                        <li>API 接口支持</li>
+                    </ul>
+                    <button class="add-to-cart" data-service="imagebed" data-price="8">加入购物车</button>
+                </div>
+
+                <!-- 私人网盘 -->
+                <div class="product-card">
+                    <div class="product-icon">☁️</div>
+                    <h3>私人网盘（Nextcloud）</h3>
+                    <div class="product-price">12 元 / 月</div>
+                    <ul class="product-features">
+                        <li>30GB 存储空间</li>
+                        <li>多端同步</li>
+                        <li>文件分享</li>
+                        <li>在线预览</li>
+                    </ul>
+                    <button class="add-to-cart" data-service="cloud" data-price="12">加入购物车</button>
+                </div>
+
+                <!-- MC 服务器 -->
+                <div class="product-card">
+                    <div class="product-icon">🎮</div>
+                    <h3>小型 MC 服务器托管</h3>
+                    <div class="product-price">20 元 / 月</div>
+                    <ul class="product-features">
+                        <li>纯净服</li>
+                        <li>支持 8-15 人</li>
+                        <li>管理面板</li>
+                        <li>定期备份</li>
+                    </ul>
+                    <button class="add-to-cart" data-service="mc" data-price="20">加入购物车</button>
+                </div>
+
+                <!-- 机器人托管 -->
+                <div class="product-card">
+                    <div class="product-icon">🤖</div>
+                    <h3>机器人托管</h3>
+                    <div class="product-price">8 元 / 月</div>
+                    <ul class="product-features">
+                        <li>支持 QQ / TG / Discord</li>
+                        <li>稳定挂机</li>
+                        <li>不掉线</li>
+                        <li>7×24 小时运行</li>
+                    </ul>
+                    <button class="add-to-cart" data-service="bot" data-price="8">加入购物车</button>
+                </div>
+
+                <!-- 内网穿透 -->
+                <div class="product-card">
+                    <div class="product-icon">🔗</div>
+                    <h3>内网穿透 / 反向代理</h3>
+                    <div class="product-price">6 元 / 月</div>
+                    <ul class="product-features">
+                        <li>域名反代</li>
+                        <li>家用服务外网访问</li>
+                        <li>支持自定义域名</li>
+                        <li>稳定连接</li>
+                    </ul>
+                    <button class="add-to-cart" data-service="proxy" data-price="6">加入购物车</button>
+                </div>
+
+                <!-- 短链接服务 -->
+                <div class="product-card">
+                    <div class="product-icon">📏</div>
+                    <h3>短链接服务</h3>
+                    <div class="product-price">5 元 / 月</div>
+                    <ul class="product-features">
+                        <li>自定义域名短链</li>
+                        <li>访问统计</li>
+                        <li>链接管理</li>
+                        <li>API 接口</li>
+                    </ul>
+                    <button class="add-to-cart" data-service="shorturl" data-price="5">加入购物车</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 购物车摘要 -->
+    <section class="cart-summary">
+        <div class="container">
+            <div class="cart-box">
+                <h3>购物车摘要</h3>
+                <div class="cart-items" id="cartItems">
+                    <p class="empty-cart">购物车为空，请选择服务加入</p>
+                </div>
+                <div class="cart-total">
+                    <span>总计：</span>
+                    <span class="total-price" id="totalPrice">0 元 / 月</span>
+                </div>
+                <div class="cart-actions">
+                    <button class="btn-checkout" id="checkoutBtn" disabled>联系客服购买</button>
+                    <button class="btn-clear" id="clearCartBtn">清空购物车</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 提示信息 -->
+    <section class="tips">
+        <div class="container">
+            <div class="tips-box">
+                <h4>💡 购买提示</h4>
+                <ul>
+                    <li>点击"联系客服购买"后，请通过页面底部的联系方式与我们取得联系</li>
+                    <li>所有服务均为月付，适合长期挂站</li>
+                    <li>支付方式：QQ、微信</li>
+                    <li>购买后将在 24 小时内为您开通服务</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h4>LimeNode 清柠云节点</h4>
+                    <p>轻量小微托管服务</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">首页</a>
+                    <a href="index.html#service">服务介绍</a>
+                    <a href="index.html#pricing">价格套餐</a>
+                    <a href="PrivacyAgreement.html">隐私协议</a>
+                    <a href="Disclaimer.html">免责声明</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2026 LimeNode 清柠云节点. 保留所有权利。</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // 购物车功能
+        let cart = [];
+
+        // 添加到购物车
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const service = button.dataset.service;
+                const price = parseInt(button.dataset.price);
+                const name = button.closest('.product-card').querySelector('h3').textContent;
+
+                // 检查是否已存在
+                const exists = cart.find(item => item.service === service);
+                if (exists) {
+                    alert('该服务已在购物车中');
+                    return;
+                }
+
+                cart.push({ service, name, price });
+                updateCartDisplay();
+            });
+        });
+
+        // 清空购物车
+        document.getElementById('clearCartBtn').addEventListener('click', () => {
+            cart = [];
+            updateCartDisplay();
+        });
+
+        // 更新购物车显示
+        function updateCartDisplay() {
+            const cartItemsEl = document.getElementById('cartItems');
+            const totalPriceEl = document.getElementById('totalPrice');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = '<p class="empty-cart">购物车为空，请选择服务加入</p>';
+                totalPriceEl.textContent = '0 元 / 月';
+                checkoutBtn.disabled = true;
+            } else {
+                let html = '';
+                let total = 0;
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    html += `
+                        <div class="cart-item">
+                            <span class="cart-item-name">${item.name}</span>
+                            <span class="cart-item-price">${item.price} 元/月</span>
+                            <button class="cart-item-remove" onclick="removeFromCart(${index})">×</button>
+                        </div>
+                    `;
+                });
+                cartItemsEl.innerHTML = html;
+                totalPriceEl.textContent = `${total} 元 / 月`;
+                checkoutBtn.disabled = false;
+            }
+        }
+
+        // 从购物车移除
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        // 联系客服
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            const services = cart.map(item => `${item.name} (${item.price}元/月)`).join('\n');
+            const message = `您好，我想购买以下服务：\n\n${services}\n\n请帮我开通服务，谢谢！`;
+            alert('请联系客服购买，联系方式见页面底部。\n\n您的选择：\n' + services);
+        });
+
+        // 移动端菜单
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
